@@ -1,0 +1,183 @@
+<%- include("head") %>
+<!-- First page starts here -->
+<body>
+  <%- include("header") %>
+    <!-- Sermon Modification And Creation section -->
+    <%if(user){%>
+    <section class="create">
+      <h1>Admin Panel</h1>
+      <button class="submit logout">Logout</button>
+      <!-- create content -->
+      <div class="create__content">
+        <form class="create__content--form" name="showcase">
+          <!-- First page starts here -->
+          <div class="create__content--form__page">
+            <h3 class="create__content--form__page--title">
+              Change Showcase Image
+            </h3>
+            <!-- Sermon Title -->
+
+            <div class="create__content--form__page--field">
+              <label for="showcase">Upload Showcase</label>
+              <input type="file" id="showcase" name="photo" />
+            </div>
+
+            <!-- Submit button -->
+            <div class="create__content--form__page--field">
+              <button class="submit">Submit</button>
+            </div>
+          </div>
+        </form>
+
+        <form class="create__content--form" name="gallery">
+          <!-- First page starts here -->
+          <div class="create__content--form__page">
+            <h3 class="create__content--form__page--title">
+              Gallery Images Upload
+            </h3>
+            <!-- Image -->
+            <div class="create__content--form__page--field">
+              <label for="image1">Upload Gallery Images</label>
+              <input type="file" id="image1" name="image" />
+            </div>
+            <!-- Department -->
+            <div class="create__content--form__page--field">
+              <label for="department">Department</label>
+              <input type="text" id="department" name="department" />
+            </div>
+            <!-- Image -->
+            <div class="create__content--form__page--field">
+              <label for="description">Image Description</label>
+              <input type="text" id="description" name="description" />
+            </div>
+            <!-- Image -->
+            <div class="create__content--form__page--field">
+              <label for="title">Image Title</label>
+              <input type="text" id="title" name="title" />
+            </div>
+
+            <!-- Submit button -->
+            <div class="create__content--form__page--field">
+              <button class="submit">Submit</button>
+            </div>
+          </div>
+        </form>
+
+        <form class="create__content--form" name="sermon">
+          <!-- First page starts here -->
+          <div class="create__content--form__page">
+            <h3 class="create__content--form__page--title">Create Sermon</h3>
+            <!-- Speaker -->
+            <div class="create__content--form__page--field">
+              <label for="speaker"> Speaker</label>
+              <input type="text" id="speaker" name="speaker" />
+            </div>
+            <!-- Sermon Title -->
+            <div class="create__content--form__page--field">
+              <label for="title"> Title of the Sermon</label>
+              <input type="text" id="title" name="title" />
+            </div>
+            <!-- Bible Verse -->
+            <div class="create__content--form__page--field">
+              <label for="bible_verse">Bible Verse</label>
+              <input type="text" id="bible_verse" name="bible_verse" />
+            </div>
+            <!-- Description -->
+            <div class="create__content--form__page--field">
+              <label for="member-opinion">Description</label>
+              <textarea name="description" id="description"></textarea>
+            </div>
+            <!-- Submit button -->
+            <div class="create__content--form__page--field">
+              <button class="submit">Submit</button>
+            </div>
+          </div>
+        </form>
+
+        <form class="create__content--form" name="member">
+          <!-- First page starts here -->
+          <div class="create__content--form__page">
+            <h3 class="create__content--form__page--title">
+              Add What Members Say
+            </h3>
+            <!-- Sermon Title -->
+            <div class="create__content--form__page--field">
+              <label for="member-name">Member's Name</label>
+              <input type="text" id="member-name" name="member_name" />
+            </div>
+            <!-- Bible Verse -->
+            <div class="create__content--form__page--field">
+              <label for="member-image">Member's Image</label>
+              <input type="file" id="member-image" name="photo" />
+            </div>
+            <!-- Description -->
+            <div class="create__content--form__page--field">
+              <label for="member-opinion">What The Member Say</label>
+              <textarea name="member_opinion" id="member-opinion"></textarea>
+            </div>
+            <!-- Submit button -->
+            <div class="create__content--form__page--field">
+              <button class="submit">Submit</button>
+            </div>
+          </div>
+        </form>
+
+        <form class="create__content--form" name="news">
+          <!-- First page starts here -->
+          <div class="create__content--form__page">
+            <h3 class="create__content--form__page--title">News Update</h3>
+            <!-- Sermon Title -->
+            <div class="create__content--form__page--field">
+              <label for="heading">News Heading</label>
+              <input type="text" name="news_title" />
+            </div>
+            <!-- Bible Verse -->
+            <div class="create__content--form__page--field">
+              <label for="date">Date</label>
+              <input type="date" name="date" />
+            </div>
+            <!-- Description -->
+            <div class="create__content--form__page--field">
+              <label for="news-description">News Description</label>
+              <textarea name="description" id="news-description"></textarea>
+            </div>
+            <!-- Submit button -->
+            <div class="create__content--form__page--field">
+              <button class="submit news-submit">Submit</button>
+            </div>
+          </div>
+          <!-- First page ends here -->
+        </form>
+
+        <form class="create__content--form" name="event">
+          <!-- First page starts here -->
+          <div class="create__content--form__page">
+            <h3 class="create__content--form__page--title">Events</h3>
+            <!-- Sermon Title -->
+            <div class="create__content--form__page--field">
+              <label for="event-title">Event Title</label>
+              <input type="text" name="event_title" />
+            </div>
+            <!-- Bible Verse -->
+            <div class="create__content--form__page--field">
+              <label for="event-date">Date</label>
+              <input type="date" name="event_date" />
+            </div>
+            <!-- Description -->
+            <div class="create__content--form__page--field">
+              <label for="event-description">Event Description</label>
+              <textarea name="description"></textarea>
+            </div>
+            <!-- Submit button -->
+            <div class="create__content--form__page--field">
+              <button class="submit">Submit</button>
+            </div>
+          </div>
+          <!-- First page ends here -->
+        </form>
+      </div>
+    </section>
+    <%}else{ location.assign("/login") }%>
+    <script src="/bundled/main.bundle.js"></script>
+  </body>
+</html>

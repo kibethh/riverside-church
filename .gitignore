@@ -1,0 +1,5 @@
+/node_modules/
+/sass/
+/up/
+*.env
+webpack.config.js

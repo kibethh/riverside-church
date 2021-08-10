@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("head") %>
+  <body>
+    <%- include("header") %>
+
+    <!-- wholesermon section -->
+    <section class="wholesermon">
+      <!-- Content -->
+      <div class="wholesermon__content">
+        <!-- <i class="fab fa-accessible-icon icons"></i> -->
+        <h2 class="wholesermon__content--title"><%= sermon.title %></h2>
+        <p class="wholesermon__content--para"><%= sermon.description %></p>
+
+        <h2 class="wholesermon__content--title">By: <%= sermon.speaker %></h2>
+      </div>
+    </section>
+
+    <!-- Scroll to top button -->
+    <div class="scroll"></div>
+
+    <!-- Footer section -->
+    <%- include("footer") %>
+  </body>
+</html>
