@@ -104,20 +104,17 @@ exports.indexPage = catchAsync(async (req, res, next) => {
   const dispMembers = [
     {
       member_name: 'Beatrice Sang',
-      member_opinion:
-        'This church has been a blessing to everyone in my family.',
+      member_opinion: 'This church has been a blessing.',
       photo: '/testimonial-1',
     },
     {
       member_name: 'Humphrey Kibet',
-      member_opinion:
-        'This church has been a blessing to everyone in my family.',
+      member_opinion: 'This church has been a blessing.',
       photo: '/testimonial-2',
     },
     {
       member_name: 'Brian Kiprotich',
-      member_opinion:
-        'This church has been a blessing to everyone in my family.',
+      member_opinion: 'This church has been a blessing.',
       photo: '/testimonial-3',
     },
   ];
