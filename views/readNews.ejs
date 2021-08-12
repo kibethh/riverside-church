@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("head") %>
+  <body>
+    <%- include("header") %>
+
+    <!-- wholesermon section -->
+    <section class="wholesermon">
+      <!-- Content -->
+      <div class="wholesermon__content">
+        <h2 class="wholesermon__content--title"><%= news.title %></h2>
+        <p class="wholesermon__content--para"><%= news.date %></p>
+        <p class="wholesermon__content--para"><%= news.description %></p>
+      </div>
+    </section>
+
+    <!-- Scroll to top button -->
+    <div class="scroll"></div>
+
+    <!-- Footer section -->
+    <%- include("footer") %>
+  </body>
+</html>

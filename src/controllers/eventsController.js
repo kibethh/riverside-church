@@ -20,7 +20,7 @@ exports.createEvent = catchAsync(async (req, res, next) => {
   const event = new Event({
     //using spread operator
     ...req.body,
-    // owner: req.user._id,
+    owner: req.user._id,
   });
   await event.save();
   res.status(201).json({

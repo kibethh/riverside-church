@@ -5,9 +5,11 @@ const sermonSchema = new mongoose.Schema(
     speaker: {
       type: String,
       required: true,
+      lowercase: true,
     },
     title: {
       type: String,
+      lowercase: true,
       trim: true,
       required: true,
     },
@@ -24,12 +26,12 @@ const sermonSchema = new mongoose.Schema(
       default: new Date().getMonth(),
       required: true,
     },
-    // owner: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   required: true,
-    //   //showing relationship with user model
-    //   ref: 'User',
-    // },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      //showing relationship with user model
+      ref: 'User',
+    },
   },
   {
     timestamps: true,

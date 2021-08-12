@@ -6,6 +6,7 @@ const router = new express.Router();
 
 router.post(
   '/',
+  authController.protect,
   showcaseController.uploadShowcasePhoto,
   showcaseController.resizeShowcasePhoto,
   showcaseController.createShowcase

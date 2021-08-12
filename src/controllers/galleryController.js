@@ -57,7 +57,7 @@ exports.createGallery = catchAsync(async (req, res, next) => {
 
   const gallery = new Gallery({
     ...body,
-    // owner: req.user._id,
+    owner: req.user._id,
   });
   await gallery.save();
   res.status(201).json({

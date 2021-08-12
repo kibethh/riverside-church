@@ -10,16 +10,9 @@
     <main class="sermons">
         <h2 class="sermons__title"><%= monthName +" " %><%= title %></h2>
       <form class="sermons__search" onsubmit="">
-        <!-- Search Box -->
-        <label for="search_sermon">Filter By Speaker's Name:</label>
-        <div>
-          <input type="text" id="search_sermon" placeholder="Speaker Name"/>
-          <button class="sermons__search--btn">Search</button>
-        </div>
-
-        <!-- Buttons -->
+               <!-- Buttons -->
         <div class="sermons__search--filter-box">
-            <a href="/sermons">All</a>
+            <a href="/news">All</a>
           
 <!-- /////////////////////////// -->
 <% function getMonthNumber(monthName) {
@@ -57,23 +50,23 @@
 
       <div class="sermons__content">
         <!-- Sermon-->
-        <% for(let sermon of sermons){%>
-        <div class="sermons__content--card">
-          <h4 class="sermons__content--card__specialty">   <%= sermon.bible_verse %></h4>
-          <h3 class="sermons__content--card__title"><%= sermon.title %></h3>
-          <h3 class="sermons__content--card__name">
-            <a href="/sermons/<%= sermon._id %>">Read sermon</a>
-          </h3>
-        
-        </div>
-        <% }%>
+        <% for(let nws of news){%>
+          <div class="sermons__content--card">
+            <h4 class="sermons__content--card__specialty"><%= nws.date %></h4>
+            <h3 class="sermons__content--card__title"><%= nws.title %></h3>
+            <h3 class="sermons__content--card__name">
+              <a href="/news/<%= nws._id %>">Read More</a>
+            </h3>
+          
+          </div>
+          <% }%>
       </div>
 
        <!-- Page Buttons -->
     <section class="page-btns">
         <div class="page-btns-container">
           <button class="page-btns-container__prev">Prev</button>
-          <% for(let i=1;i<=(Math.ceil(sermonsCount/4));i++){%>
+          <% for(let i=1;i<=(Math.ceil(newsCount/4));i++){%>
           <!-- /////////////////////////////// -->
           <% const activeOrNot = (i== page) ? 'active' :''; %>
   

@@ -14,12 +14,12 @@ const departmentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // owner: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   required: true,
-    //   //showing relationship with user model
-    //   ref: 'User',
-    // },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      //showing relationship with user model
+      ref: 'User',
+    },
   },
   { timestamps: true }
 );

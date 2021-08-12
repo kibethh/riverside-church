@@ -6,9 +6,9 @@ const router = new express.Router();
 
 router.post(
   '/',
+  authController.protect,
   galleryController.uploadGalleryPhoto,
   galleryController.resizeGalleryPhoto,
-  // authController.authMember,
   galleryController.createGallery
 );
 

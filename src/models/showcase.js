@@ -7,12 +7,12 @@ const showcaseSchema = new mongoose.Schema({
     required: true,
   },
 
-  // owner: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: true,
-  //   //showing relationship with user model
-  //   ref: 'User',
-  // },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    //showing relationship with user model
+    ref: 'User',
+  },
 });
 const Showcase = mongoose.model('Showcase', showcaseSchema);
 module.exports = Showcase;

@@ -46,22 +46,11 @@ exports.resizeMemberPhoto = catchAsync(async (req, res, next) => {
 exports.uploadMemberPhoto = upload.single('photo');
 
 exports.createMembers = catchAsync(async (req, res, next) => {
-  // if (req.file) req.body.photo = req.file.filename;
-  // console.log(JSON.parse(JSON.stringify(req.body)));
-  //Making a proper object from the body
   req.body = JSON.parse(JSON.stringify(req.body));
-  // console.log(req.file);
-  console.log(req.body);
-  // console.log(req.file);
-
-  // const body = { ...req.body };
-  // body.photo = req.file.filename;
-
-  // console.log(body);
 
   const members = new Members({
     ...req.body,
-    // owner: req.user._id,
+    owner: req.user._id,
   });
   await members.save();
   res.status(201).json({

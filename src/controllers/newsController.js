@@ -11,16 +11,16 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 exports.createNews = catchAsync(async (req, res, next) => {
-  const { news_title, date, description } = req.body;
+  const { title, date, description } = req.body;
   //1. check if all details exist
-  if (!news_title || !date || !description) {
+  if (!title || !date || !description) {
     return next(new AppError('Please provide all details!!', 400));
   }
 
   const news = new News({
     //using spread operator
     ...req.body,
-    // owner: req.user._id,
+    owner: req.user._id,
   });
   await news.save();
   res.status(201).json({

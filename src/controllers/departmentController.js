@@ -14,6 +14,7 @@ const filterObj = (obj, ...allowedFields) => {
 exports.createDepartment = catchAsync(async (req, res, next) => {
   const department = new Department({
     ...req.body,
+    owner: req.user._id,
   });
   await department.save();
   res.status(201).json({
@@ -22,7 +23,6 @@ exports.createDepartment = catchAsync(async (req, res, next) => {
       department,
     },
   });
-  // next();
 });
 
 exports.allDepartments = catchAsync(async (req, res, next) => {
@@ -58,7 +58,7 @@ exports.updateDepartment = catchAsync(async (req, res, next) => {
 exports.removeDepartment = catchAsync(async (req, res, next) => {
   const department = await Department.findOneAndDelete({
     _id: req.params.id,
-    // owner: req.user._id,
+    owner: req.user._id,
   });
   if (!department) {
     return next(new AppError('There is no such department!!', 404));

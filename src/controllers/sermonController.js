@@ -23,7 +23,7 @@ exports.createSermon = catchAsync(async (req, res, next) => {
   console.log(req.body);
   const sermon = new Sermon({
     ...req.body,
-    // owner: req.user._id,
+    owner: req.user._id,
   });
   await sermon.save();
   res.status(201).json({
@@ -71,7 +71,7 @@ exports.searchSermon = catchAsync(async (req, res, next) => {
   const _id = req.params.id;
   const sermon = await Sermon.findOne({
     _id,
-    // owner: req.user._id,
+    owner: req.user._id,
   });
   if (!sermon) {
     return next(new AppError('There is no such sermon', 404));
@@ -82,32 +82,6 @@ exports.searchSermon = catchAsync(async (req, res, next) => {
   });
   next();
 });
-
-// exports.updateSermon = catchAsync(async (req, res, next) => {
-//   const updates = Object.keys(req.body);
-//   const allowedUpdates = ['title', 'bible_verse', 'description'];
-//   const isValidOperation = updates.every((update) =>
-//     allowedUpdates.includes(update)
-//   );
-//   if (!isValidOperation) {
-//     return next(new AppError('Invalid updates', 400));
-//   }
-//   const sermon = await Sermon.findOne({
-//     _id: req.params.id,
-//     owner: req.user._id,
-//   });
-//   if (!sermon) {
-//     return next(new AppError('No sermon found', 404));
-//   }
-//   updates.forEach((update) => (sermon[update] = req.params[update]));
-//   await sermon.save();
-
-//   res.status(200).json({
-//     status: 'success',
-//     data: sermon,
-//   });
-//   // next();
-// });
 
 exports.updateSermon = catchAsync(async (req, res, next) => {
   //2. Filtered out unwanted field names not allowed to be updated
@@ -133,7 +107,7 @@ exports.updateSermon = catchAsync(async (req, res, next) => {
 exports.removeSermon = catchAsync(async (req, res, next) => {
   const sermon = await Sermon.findOneAndDelete({
     _id: req.params.id,
-    // owner: req.user._id,
+    owner: req.user._id,
   });
   if (!sermon) {
     return next(new AppError('No sermon to be deleted', 404));

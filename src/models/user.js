@@ -7,71 +7,76 @@ const Task = require('./sermon');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please provide your name'],
-    trim: true,
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: [true, 'Please provide your email'],
-    trim: true,
-    lowercase: true,
-    validate: [validator.isEmail, 'Please provide a valid email.'],
-  },
-  photo: {
-    type: String,
-    default: 'default.jpeg',
-  },
-  age: {
-    type: Number,
-    default: 0,
-  },
-  role: {
-    type: String,
-    enum: ['user', 'guide', 'lead-guide', 'admin'],
-    default: 'user',
-  },
-  password: {
-    type: String,
-    required: [true, 'Please provide a password'],
-    trim: true,
-    minlength: 7,
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    trim: true,
-    minlength: 7,
-    select: false,
-    validate: {
-      //this only works on CREATE and SAVE
-      validator: function (el) {
-        return el === this.password;
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Please provide your name'],
+      trim: true,
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: [true, 'Please provide your email'],
+      trim: true,
+      lowercase: true,
+      validate: [validator.isEmail, 'Please provide a valid email.'],
+    },
+    photo: {
+      type: String,
+      default: 'default.jpeg',
+    },
+    age: {
+      type: Number,
+      default: 0,
+    },
+    role: {
+      type: String,
+      enum: ['user', 'guide', 'lead-guide', 'admin'],
+      default: 'user',
+    },
+    password: {
+      type: String,
+      required: [true, 'Please provide a password'],
+      trim: true,
+      minlength: 7,
+      select: false,
+    },
+    passwordConfirm: {
+      type: String,
+      required: [true, 'Please confirm your password'],
+      trim: true,
+      minlength: 7,
+      select: false,
+      validate: {
+        //this only works on CREATE and SAVE
+        validator: function (el) {
+          return el === this.password;
+        },
+        message: 'Passwords are not the same',
       },
-      message: 'Passwords are not the same',
+    },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
     },
   },
-  passwordChangedAt: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 //showing relationship between 2 entities
 //virtual because we are not changing anything
-userSchema.virtual('tasks', {
-  ref: 'Task',
-  //associated with id that's why localField=>id
-  localField: '_id',
-  foreignField: 'owner',
-});
+// userSchema.virtual('tasks', {
+//   ref: 'Task',
+//   //associated with id that's why localField=>id
+//   localField: '_id',
+//   foreignField: 'owner',
+// });
 
 //Hash the plain text password before saving
 userSchema.pre('save', async function (next) {

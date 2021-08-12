@@ -46,7 +46,7 @@ exports.createShowcase = catchAsync(async (req, res, next) => {
   const showcase = new Showcase({
     //using spread operator
     ...body,
-    // owner: req.user._id,
+    owner: req.user._id,
   });
   await showcase.save();
   res.status(201).json({

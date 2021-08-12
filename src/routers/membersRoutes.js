@@ -6,6 +6,7 @@ const router = new express.Router();
 
 router.post(
   '/',
+  authController.protect,
   membersController.uploadMemberPhoto,
   membersController.resizeMemberPhoto,
   authController.authMember,

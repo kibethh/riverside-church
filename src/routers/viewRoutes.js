@@ -5,16 +5,27 @@ const router = express.Router();
 
 router.use(authController.isLoggedIn);
 
-router.get('/', viewsController.gallery, viewsController.indexPage);
+// router.get('/', viewsController.gallery, viewsController.indexPage);
+
+router.get('/', viewsController.index);
 
 // router.get('/about', viewsController.aboutPage);
 
 router.get('/login', viewsController.loginPage);
+
 router.get('/tithes', viewsController.tithesPage);
 
 router.get('/sermons', viewsController.getSermons);
 
+router.get('/news', viewsController.getNews);
+
+router.get('/events', viewsController.getEvents);
+
 router.get('/sermons/:id', viewsController.readSermon);
+
+router.get('/events/:id', viewsController.readEvent);
+
+router.get('/news/:id', viewsController.readNews);
 
 router.get('/departments', viewsController.departments);
 

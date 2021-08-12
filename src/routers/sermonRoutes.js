@@ -7,10 +7,6 @@ const router = new express.Router();
 // router.post('/', authController.protect, sermonController.createSermon);
 router.post('/', sermonController.createSermon);
 
-//GET tasks?completed=true
-//GET tasks?limit&skip
-//GET task?sortBy=createdat:desc
-// router.get('/', authController.protect, sermonController.userSermons);
 router.get('/', sermonController.getSermons);
 // router.get('/:id', authController.protect, sermonController.searchSermon);
 router.get('/:id', sermonController.searchSermon);
