@@ -4,8 +4,8 @@ const sermonController = require('../controllers/sermonController');
 
 const router = new express.Router();
 
-// router.post('/', authController.protect, sermonController.createSermon);
-router.post('/', sermonController.createSermon);
+router.post('/', authController.protect, sermonController.createSermon);
+// router.post('/', sermonController.createSermon);
 
 router.get('/', sermonController.getSermons);
 // router.get('/:id', authController.protect, sermonController.searchSermon);

@@ -107,7 +107,7 @@ exports.removeevent = catchAsync(async (req, res, next) => {
     owner: req.user._id,
   });
   if (!event) {
-    return next(new AppError('No event to be deleted', 404));
+    return next(new AppError('Not created by you! Not deleted!!', 404));
   }
   res.status(200).json({
     status: 'success',

@@ -1,0 +1,48 @@
+<%- include("head") %>
+<body class="container">
+  <!-- Header section -->
+  <%- include("header") %>
+  <main>
+   
+    <div class="createModify__content">
+      <div class="createModify__content--form__page--field">
+        <input type="text" hidden id="id" name="id" value="<%=sermon[0]._id%>"/>
+  </div>
+      <form class="createModify__content--form" name="update">
+        
+        <!-- First page starts here -->
+        <div class="createModify__content--form__page">
+          <h3 class="createModify__content--form__page--title">Update Sermon</h3>
+          <!-- Speaker -->
+          
+          <div class="createModify__content--form__page--field">
+            <label for="speaker"> Speaker</label>
+            <input type="text" id="speaker" name="speaker" value="<%=sermon[0].speaker%>"/>
+          </div>
+          <!-- Sermon Title -->
+          <div class="createModify__content--form__page--field">
+            <label for="title"> Title of the Sermon</label>
+            <input type="text" id="title" name="title" value="<%= sermon[0].title%>"/>
+          </div>
+          <!-- Bible Verse -->
+          <div class="createModify__content--form__page--field">
+            <label for="bible_verse">Bible Verse</label>
+            <input type="text" id="bible_verse" name="bible_verse" value="<%= sermon[0].bible_verse%>"/>
+          </div>
+          <!-- Description -->
+          <div class="createModify__content--form__page--field">
+            <label for="description">Description</label>
+            <textarea name="description" id="description"><%= sermon[0].description%></textarea>
+          </div>
+          <!-- Submit button -->
+          <div class="createModify__content--form__page--field">
+            <button class="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+    <%- include("footer") %>
+  </body>
+</html>

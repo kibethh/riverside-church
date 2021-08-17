@@ -85,8 +85,18 @@ exports.searchSermon = catchAsync(async (req, res, next) => {
 
 exports.updateSermon = catchAsync(async (req, res, next) => {
   //2. Filtered out unwanted field names not allowed to be updated
+  console.log(req.body);
+  if (
+    !req.body.speaker ||
+    !req.body.title ||
+    !req.body.bible_verse ||
+    !req.body.description
+  ) {
+    return next(new AppError('Please provide all details!!', 400));
+  }
   const filteredBody = filterObj(
     req.body,
+    'speaker',
     'title',
     'bible_verse',
     'description'
@@ -98,6 +108,10 @@ exports.updateSermon = catchAsync(async (req, res, next) => {
     runValidators: true,
   });
 
+  if (!sermon) {
+    return next(new AppError("Not Created by you! Can't update!!"));
+  }
+
   res.status(200).json({
     status: 'success',
     data: sermon,
@@ -107,16 +121,15 @@ exports.updateSermon = catchAsync(async (req, res, next) => {
 exports.removeSermon = catchAsync(async (req, res, next) => {
   const sermon = await Sermon.findOneAndDelete({
     _id: req.params.id,
-    owner: req.user._id,
+    // owner: req.user._id,
   });
   if (!sermon) {
-    return next(new AppError('No sermon to be deleted', 404));
+    return next(new AppError('Not created by you! Not deleted!!', 404));
   }
   res.status(200).json({
     status: 'success',
     data: sermon,
   });
-  next();
 });
 
 exports.getSermons = catchAsync(async (req, res, next) => {

@@ -1,25 +1,35 @@
-// import "@babel/polyfill"
+import '@babel/polyfill';
 import { showAlert } from './alerts';
 import { scrollToTop } from './scroll';
 import { login } from './login';
 import { logout } from './logout';
-import { createSermon } from './sermon';
+import { createSermon, updateSermon, deleteSermon } from './sermon';
 import { galleryUpload } from './galleryUpload';
-import { createMember } from './member';
-import { createNews } from './news';
-import { createEvent } from './event';
+import { createMember, updateMember, deleteMember } from './member';
+import { createNews, updateNews, deleteNews } from './news';
+import { createEvent, updateEvent, deleteEvent } from './event';
+import {
+  createDepartment,
+  updateDepartment,
+  deleteDepartment,
+} from './department';
 import { changeShowcase } from './showCase';
 
 // forms
 const loginForm = document.forms.login;
 const sermonForm = document.forms.sermon;
+const updateForm = document.forms.update;
 const galleryForm = document.forms.gallery;
 const memberForm = document.forms.member;
 const newsForm = document.forms.news;
 const eventForm = document.forms.event;
+const departmentForm = document.forms.department;
 const showcaseForm = document.forms.showcase;
 // admin logout
 const logoutBtn = document.querySelector('.logout');
+// delete
+const deleteBtns = document.querySelectorAll('.delete');
+const deleteId = document.querySelectorAll('.Id');
 
 // Nav bar Variables
 const header = document.querySelector('.header');
@@ -235,6 +245,20 @@ if (sermonForm)
     const data = new FormData(sermonForm);
     createSermon(data);
   });
+if (updateForm)
+  updateForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(updateForm);
+    console.log(Object.fromEntries(data));
+    let id = document.querySelector('#id').value;
+
+    if (location.href.indexOf('Sermon') != -1) updateSermon(data, id);
+    if (location.href.indexOf('News') != -1) updateNews(data, id);
+    if (location.href.indexOf('Member') != -1) updateMember(data, id);
+    if (location.href.indexOf('Event') != -1) updateEvent(data, id);
+    if (location.href.indexOf('Department') != -1) updateDepartment(data, id);
+  });
+
 if (galleryForm)
   galleryForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -259,6 +283,12 @@ if (eventForm)
     const data = new FormData(eventForm);
     createEvent(data);
   });
+if (departmentForm)
+  departmentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(departmentForm);
+    createDepartment(data);
+  });
 if (showcaseForm)
   showcaseForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -271,3 +301,23 @@ if (logoutBtn)
 
     logout();
   });
+
+if (deleteBtns)
+  for (let i = 0; i < deleteBtns.length; i++) {
+    deleteBtns[i].addEventListener('click', function (e) {
+      e.preventDefault();
+      console.log('clicked');
+      let id;
+      // alert(location.href);
+      // alert(location.href.indexOf('Sermon'));
+      console.log(deleteId);
+      for (let j = 0; j < deleteId.length; j++) {
+        id = deleteId[i].value;
+      }
+      if (location.href.indexOf('Sermon') != -1) deleteSermon(id);
+      if (location.href.indexOf('News') != -1) deleteNews(id);
+      if (location.href.indexOf('Member') != -1) deleteMember(id);
+      if (location.href.indexOf('Event') != -1) deleteEvent(id);
+      if (location.href.indexOf('Department') != -1) deleteDepartment(id);
+    });
+  }

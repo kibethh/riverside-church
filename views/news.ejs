@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="">
-    <%- include("head") %>
+  <%- include("head") %>
 
   <body class="container">
     <!-- Header section -->
@@ -8,87 +8,86 @@
 
     <!-- motto section -->
     <main class="sermons">
-        <h2 class="sermons__title"><%= monthName +" " %><%= title %></h2>
+      <h2 class="sermons__title"><%= monthName +" " %><%= title %></h2>
       <form class="sermons__search" onsubmit="">
-               <!-- Buttons -->
+        <!-- Buttons -->
         <div class="sermons__search--filter-box">
-            <a href="/news">All</a>
-          
-<!-- /////////////////////////// -->
-<% function getMonthNumber(monthName) {
-    <!-- ///////////////////////////////////// -->
-    const months = new Map([ ['January',"0"], ['February',"1"],
-    ['March',"2"], ['April',"3"], ['May',"4"], ['June',"5"], ['July',"6"],
-    ['August',"7"], ['September',"8"], ['October',"9"], ['November',"10"],
-    ['December',"11"], ]);
+          <a href="/news">All</a>
 
-    <!-- /////////////////////////////// -->
+          <!-- /////////////////////////// -->
+          <% function getMonthNumber(monthName) {
+          <!-- ///////////////////////////////////// -->
+          const months = new Map([ ['January',"0"], ['February',"1"],
+          ['March',"2"], ['April',"3"], ['May',"4"], ['June',"5"], ['July',"6"],
+          ['August',"7"], ['September',"8"], ['October',"9"], ['November',"10"],
+          ['December',"11"], ]);
 
-    return months.get(monthName); }
+          <!-- /////////////////////////////// -->
 
-    <!-- ///////////////////////////////////////// -->
+          return months.get(monthName); }
 
-    const monthNumber=getMonthNumber(monthName); %>
+          <!-- ///////////////////////////////////////// -->
 
-    <!-- /////////////////////////////////////////// -->
-    <% let indexes=[0,1,2,3,4,5,6,7,8,9,10,11]; const months = [
-    'January', 'February', 'March', 'April', 'May', 'June', 'July',
-    'August', 'September', 'October', 'November', 'December', ];
+          const monthNumber=getMonthNumber(monthName); %>
 
-    <!-- //////////////////////////////////////// -->
+          <!-- /////////////////////////////////////////// -->
+          <% let indexes=[0,1,2,3,4,5,6,7,8,9,10,11]; const months = [
+          'January', 'February', 'March', 'April', 'May', 'June', 'July',
+          'August', 'September', 'October', 'November', 'December', ];
 
-    indexes.forEach((i)=>{ %> <% const activeOrNot = (i== monthNumber) ?
-    'active' :''; %>
-    <button
-    class="sermons__search--filter-box__btn <%= activeOrNot %>"
-    data-filter="<%=i%>">
-    <%=months[i]%>
-  </button>
-  <% }) %>
+          <!-- //////////////////////////////////////// -->
+
+          indexes.forEach((i)=>{ %> <% const activeOrNot = (i== monthNumber) ?
+          'active' :''; %>
+          <button
+            class="sermons__search--filter-box__btn <%= activeOrNot %>"
+            data-filter="<%=i%>"
+          >
+            <%=months[i]%>
+          </button>
+          <% }) %>
         </div>
       </form>
 
       <div class="sermons__content">
         <!-- Sermon-->
         <% for(let nws of news){%>
+        <a href="/news/<%= nws._id %>">
           <div class="sermons__content--card">
             <h4 class="sermons__content--card__specialty"><%= nws.date %></h4>
             <h3 class="sermons__content--card__title"><%= nws.title %></h3>
-            <h3 class="sermons__content--card__name">
-              <a href="/news/<%= nws._id %>">Read More</a>
-            </h3>
-          
+            <h3 class="sermons__content--card__name"></h3>
           </div>
-          <% }%>
+        </a>
+        <% }%>
       </div>
 
-       <!-- Page Buttons -->
-    <section class="page-btns">
+      <!-- Page Buttons -->
+      <section class="page-btns">
         <div class="page-btns-container">
           <button class="page-btns-container__prev">Prev</button>
           <% for(let i=1;i<=(Math.ceil(newsCount/4));i++){%>
           <!-- /////////////////////////////// -->
           <% const activeOrNot = (i== page) ? 'active' :''; %>
-  
+
           <button
             class="page-btns-container__item <%= activeOrNot %>"
             data-page="<%=i%>"
-          >Page <%=i%>
+          >
+            Page <%=i%>
           </button>
-  
+
           <%}%>
-  
+
           <button class="page-btns-container__next">Next</button>
         </div>
       </section>
     </main>
 
-   <!-- Scroll to top button -->
-   <div class="scroll"></div>
+    <!-- Scroll to top button -->
+    <div class="scroll"></div>
 
     <!-- Footer section -->
     <%- include("footer") %>
-
-
   </body>
 </html>

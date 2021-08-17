@@ -1,0 +1,24 @@
+ <%- include("head") %>
+  <body class="container">
+    <!-- Header section -->
+    <%- include("header") %>
+   
+<main class="modify">
+  <h2 class="modify__heading">Modify or Delete</h2>
+  
+<%for (let sermon of sermons){%>
+
+  <div class="modify__content">
+    <h2 class="modify__content--title"><%= sermon.title%></h2>
+    <h2 class="modify__content--title"><%= sermon.speaker%></h2>
+    <input type="text" class="Id" value="<%= sermon._id%>" hidden>
+    <a class="modify__content--link" href="/editSermons/<%=sermon._id%>">Edit</a>
+   <a class="modify__content--link delete" href="#">Delete</a>
+
+  </div>
+  <%}%>
+</main>
+
+    <%- include("footer") %>
+  </body>
+</html>

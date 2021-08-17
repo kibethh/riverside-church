@@ -11,6 +11,7 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 exports.createNews = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   const { title, date, description } = req.body;
   //1. check if all details exist
   if (!title || !date || !description) {
@@ -29,7 +30,6 @@ exports.createNews = catchAsync(async (req, res, next) => {
       news,
     },
   });
-  // next();
 });
 
 exports.usernews = catchAsync(async (req, res, next) => {
@@ -82,7 +82,7 @@ exports.searchnews = catchAsync(async (req, res, next) => {
 
 exports.updatenews = catchAsync(async (req, res, next) => {
   //2. Filtered out unwanted field names not allowed to be updated
-  const filteredBody = filterObj(req.body, 'news_title', 'date', 'description');
+  const filteredBody = filterObj(req.body, 'title', 'date', 'description');
 
   //3. Update news document
   const news = await News.findByIdAndUpdate(req.params.id, filteredBody, {
@@ -102,7 +102,7 @@ exports.removenews = catchAsync(async (req, res, next) => {
     owner: req.user._id,
   });
   if (!news) {
-    return next(new AppError('No news to be deleted', 404));
+    return next(new AppError('Not created by you! Not deleted!!', 404));
   }
   res.status(200).json({
     status: 'success',

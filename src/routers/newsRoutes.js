@@ -4,7 +4,6 @@ const newsController = require('../controllers/newsController');
 
 const router = new express.Router();
 
-// router.post('/', authController.protect, newsController.createnews);
 router.post('/', authController.protect, newsController.createNews);
 router.get('/', newsController.getnews);
 router.get('/:id', authController.protect, newsController.searchnews);

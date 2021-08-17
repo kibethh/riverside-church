@@ -1,0 +1,43 @@
+<%- include("head") %>
+<body class="container">
+  <!-- Header section -->
+  <%- include("header") %>
+  <main>
+    <div class="createModify__content">
+      <div class="createModify__content--form__page--field">
+            <input type="text" hidden id="id" name="id" value="<%=event[0]._id%>"/>
+      </div>
+
+      <form class="createModify__content--form" name="update">
+        <!-- First page starts here -->
+        <div class="createModify__content--form__page">
+          <h3 class="createModify__content--form__page--title">Events</h3>
+          <!-- Sermon Title -->
+          <div class="createModify__content--form__page--field">
+            <label for="event-title">Event Title</label>
+            <input type="text" name="event_title" value="<%=event[0].event_title%>"/>
+          </div>
+          <!-- Bible Verse -->
+          <div class="createModify__content--form__page--field">
+            <label for="event-date">Date</label>
+            <input type="date" name="event_date" value="<%=event[0].event_date%>"/>
+          </div>
+          <!-- Description -->
+          <div class="createModify__content--form__page--field">
+            <label for="event-description">Event Description</label>
+            <textarea name="description" ><%=event[0].description%></textarea>
+          </div>
+          <!-- Submit button -->
+          <div class="createModify__content--form__page--field">
+            <button class="submit">Submit</button>
+          </div>
+        </div>
+        <!-- First page ends here -->
+      </form>
+    </div>
+    </main>
+  
+
+    <%- include("footer") %>
+  </body>
+</html>

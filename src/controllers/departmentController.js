@@ -12,6 +12,12 @@ const filterObj = (obj, ...allowedFields) => {
 };
 
 exports.createDepartment = catchAsync(async (req, res, next) => {
+  const { name, mission, vision } = req.body;
+  //1. check if all details exist
+  if (!name || !mission || !vision) {
+    return next(new AppError('Please provide all details!!', 400));
+  }
+
   const department = new Department({
     ...req.body,
     owner: req.user._id,
@@ -61,7 +67,7 @@ exports.removeDepartment = catchAsync(async (req, res, next) => {
     owner: req.user._id,
   });
   if (!department) {
-    return next(new AppError('There is no such department!!', 404));
+    return next(new AppError('Not created by you! Not deleted!!', 404));
   }
   res.status(200).json({
     status: 'success',

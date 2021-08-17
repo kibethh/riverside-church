@@ -1,0 +1,44 @@
+<%- include("head") %>
+<body class="container">
+  <!-- Header section -->
+  <%- include("header") %>
+  <main>
+    <div class="createModify__content">
+   <div class="createModify__content">
+          <div class="createModify__content--form__page--field">
+            <input type="text" hidden id="id" name="id" value="<%=news[0]._id%>"/>
+      </div>
+      
+      <form class="createModify__content--form" name="update">
+        <!-- First page starts here -->
+        <div class="createModify__content--form__page">
+          <h3 class="createModify__content--form__page--title">News Update</h3>
+          <!-- Sermon Title -->
+          <div class="createModify__content--form__page--field">
+            <label for="heading">News Heading</label>
+            <input type="text" name="title" value="<%=news[0].title%>"/>
+          </div>
+          <!-- Bible Verse -->
+          <div class="createModify__content--form__page--field">
+            <label for="date">Date</label>
+            <input type="date" name="date" value="<%=news[0].date%>"/>
+          </div>
+          <!-- Description -->
+          <div class="createModify__content--form__page--field">
+            <label for="news-description">News Description</label>
+            <textarea name="description" id="news-description" ><%=news[0].description%></textarea>
+          </div>
+          <!-- Submit button -->
+          <div class="createModify__content--form__page--field">
+            <button class="submit news-submit">Submit</button>
+          </div>
+        </div>
+        <!-- First page ends here -->
+      </form>
+    </div>
+    </div>
+  </main>
+
+    <%- include("footer") %>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<%- include("head") %>
+<body class="container">
+  <!-- Header section -->
+  <%- include("header") %>
+  <%console.log(department) %>
+  <main>
+    <div class="createModify__content">
+   <div class="createModify__content">
+          <div class="createModify__content--form__page--field">
+            <input type="text" hidden id="id" name="id" value="<%=department[0]._id%>"/>
+      </div>
+      
+      <form class="createModify__content--form" name="update">
+        <!-- First page starts here -->
+        <div class="createModify__content--form__page">
+          <h3 class="createModify__content--form__page--title">Department Update</h3>
+          <!-- Sermon Title -->
+          <div class="createModify__content--form__page--field">
+            <label for="name">Department's Name</label>
+            <input type="text" id="name" name="name" value="<%=department[0].name%>"/>
+          </div>
+          <!-- Bible Verse -->
+          <div class="createModify__content--form__page--field">
+            <label for="mission">Mission</label>
+            <textarea type="text" name="mission" id="mission"/><%=department[0].mission%></textarea>
+          </div>
+          <!-- Description -->
+          <div class="createModify__content--form__page--field">
+            <label for="vision">Vision</label>
+            <textarea name="vision" id="vision" ><%=department[0].vision%></textarea>
+          </div>
+          <!-- Submit button -->
+          <div class="createModify__content--form__page--field">
+            <button class="submit">Submit</button>
+          </div>
+        </div>
+        <!-- First page ends here -->
+      </form>
+    </div>
+    </div>
+  </main>
+
+    <%- include("footer") %>
+  </body>
+</html>

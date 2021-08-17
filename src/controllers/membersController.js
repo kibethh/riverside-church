@@ -137,7 +137,7 @@ exports.removemembers = catchAsync(async (req, res, next) => {
     owner: req.user._id,
   });
   if (!members) {
-    return next(new AppError('No members to be deleted', 404));
+    return next(new AppError('No member to be deleted', 404));
   }
   res.status(200).json({
     status: 'success',

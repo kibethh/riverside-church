@@ -1,0 +1,21 @@
+ <%- include("head") %>
+  <body class="container">
+    <!-- Header section -->
+    <%- include("header") %>
+<main class="modify">
+  <h2 class="modify__heading">Modify or Delete</h2>
+  <% for(let nws of news){%>
+  <div class="modify__content">
+    <h2 class="modify__content--title"><%= nws.title %></h2>
+    <h2 class="modify__content--title"><%= nws.date %></h2>
+    <input type="text" class="Id" value="<%= nws._id%>" hidden>
+    <a class="modify__content--link" href="/editNews/<%= nws._id %>">Edit</a>
+   <a class="modify__content--link delete" href="#">Delete</a>
+
+  </div>
+  <%}%>
+</main>
+
+    <%- include("footer") %>
+  </body>
+</html>

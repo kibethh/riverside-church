@@ -139,16 +139,6 @@ exports.viewDepartment = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.loginPage = (req, res) => {
-  res.render('login');
-};
-exports.tithesPage = (req, res) => {
-  res.render('tithes');
-};
-exports.adminPage = (req, res) => {
-  res.render('admin');
-};
-
 exports.getNews = catchAsync(async (req, res, next) => {
   let newsCount = await News.countDocuments();
   let page = 1;
@@ -309,5 +299,128 @@ exports.index = catchAsync(async (req, res, next) => {
   res.status(200).render('index', {
     images,
     dispMembers,
+  });
+});
+
+exports.loginPage = (req, res) => {
+  res.render('login');
+};
+exports.tithesPage = (req, res) => {
+  res.render('tithes');
+};
+exports.adminPage = (req, res) => {
+  res.render('admin');
+};
+exports.aboutPage = (req, res) => {
+  res.render('about');
+};
+exports.modifySermonPage = catchAsync(async (req, res) => {
+  const features = new APIFeatures(Sermon.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const sermons = await features.query;
+  res.render('modifySermon', {
+    sermons,
+  });
+});
+exports.modifySermon = catchAsync(async (req, res) => {
+  const features = new APIFeatures(Sermon.find(), {
+    _id: req.params.id,
+  }).filter();
+
+  const sermon = await features.query;
+  res.render('sermonUpdate', {
+    sermon,
+  });
+});
+exports.modifyMemberPage = catchAsync(async (req, res) => {
+  const features = new APIFeatures(Members.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const members = await features.query;
+  res.render('modifyMember', {
+    members,
+  });
+});
+exports.modifyMember = catchAsync(async (req, res) => {
+  const features = new APIFeatures(Members.find(), {
+    _id: req.params.id,
+  }).filter();
+
+  const member = await features.query;
+  res.render('memberUpdate', {
+    member,
+  });
+});
+exports.modifyEventPage = catchAsync(async (req, res) => {
+  const features = new APIFeatures(Event.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const events = await features.query;
+  res.render('modifyEvent', {
+    events,
+  });
+});
+exports.modifyEvent = catchAsync(async (req, res) => {
+  const features = new APIFeatures(Event.find(), {
+    _id: req.params.id,
+  }).filter();
+
+  const event = await features.query;
+  res.render('eventUpdate', {
+    event,
+  });
+});
+exports.modifyNewsPage = catchAsync(async (req, res) => {
+  const features = new APIFeatures(News.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const news = await features.query;
+  res.render('modifyNews', {
+    news,
+  });
+});
+exports.modifyNews = catchAsync(async (req, res) => {
+  const features = new APIFeatures(News.find(), {
+    _id: req.params.id,
+  }).filter();
+
+  const news = await features.query;
+  res.render('newsUpdate', {
+    news,
+  });
+});
+exports.modifyDepartmentPage = catchAsync(async (req, res) => {
+  const features = new APIFeatures(Department.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const departments = await features.query;
+  res.render('modifyDepartment', {
+    departments,
+  });
+});
+exports.modifyDepartments = catchAsync(async (req, res) => {
+  const features = new APIFeatures(Department.find(), {
+    _id: req.params.id,
+  }).filter();
+
+  const department = await features.query;
+  res.render('departmentUpdate', {
+    department,
   });
 });

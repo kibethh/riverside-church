@@ -13,9 +13,7 @@ export const login = async (data) => {
       const jsonResp = await response.json();
       console.log(jsonResp.status);
       showAlert('success', 'Login success');
-      window.setTimeout(() => {
-        location.assign('/admin');
-      }, 1500);
+      location.assign('/admin');
       return;
     }
 

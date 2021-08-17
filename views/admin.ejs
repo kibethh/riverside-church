@@ -6,7 +6,15 @@
     <%if(user){%>
     <section class="create">
       <h1>Admin Panel</h1>
-      <button class="submit logout">Logout</button>
+       <!-- Submit button -->
+       <div class="buttons">
+        <a class="submit logout modify__content--link" href="#">Logout</a>
+        <a href="/editSermons" class="modify__content--link">Manage Sermons</a>
+        <a href="/editMembers" class="modify__content--link">Manage Members</a>
+        <a href="/editEvents" class="modify__content--link">Manage Events</a>
+        <a href="/editNews" class="modify__content--link">Manage News</a>
+        <a href="/editDepartments" class="modify__content--link">Manage Departments</a>
+      </div>
       <!-- create content -->
       <div class="create__content">
         <form class="create__content--form" name="showcase">
@@ -129,7 +137,7 @@
             <!-- Sermon Title -->
             <div class="create__content--form__page--field">
               <label for="heading">News Heading</label>
-              <input type="text" name="news_title" />
+              <input type="text" name="title" />
             </div>
             <!-- Bible Verse -->
             <div class="create__content--form__page--field">
@@ -175,9 +183,36 @@
           </div>
           <!-- First page ends here -->
         </form>
+        <form class="create__content--form" name="department">
+          <!-- First page starts here -->
+          <div class="create__content--form__page">
+            <h3 class="create__content--form__page--title">Departments</h3>
+            <!-- Sermon Title -->
+            <div class="create__content--form__page--field">
+              <label for="department_name">Department's Name</label>
+              <input type="text" id="department_name" name="name" />
+            </div>
+            <!-- Bible Verse -->
+            <div class="create__content--form__page--field">
+              <label for="mission">Mission</label>
+              <input type="text" id="mission" name="mission" />
+            </div>
+            <!-- Description -->
+            <div class="create__content--form__page--field">
+              <label for="vision">Vision</label>
+              <input type="text" id="vision" name="vision" />
+            </div>
+            <!-- Submit button -->
+            <div class="create__content--form__page--field">
+              <button class="submit">Submit</button>
+            </div>
+          </div>
+          <!-- First page ends here -->
+        </form>
       </div>
     </section>
     <%}else{ location.assign("/login") }%>
-    <script src="/bundled/main.bundle.js"></script>
+   
+    <%- include("footer") %>
   </body>
 </html>

@@ -3,13 +3,15 @@
   <%- include("head") %>
   <body>
     <%- include("header") %>
-
     <!-- wholesermon section -->
     <section class="wholesermon">
+      <%console.log(event)%>
       <!-- Content -->
       <div class="wholesermon__content">
-        <h2 class="wholesermon__content--title"><%= event.title %></h2>
-        <p class="wholesermon__content--para"><%= event.date %></p>
+        <h2 class="wholesermon__content--title"><%= event.event_title %></h2>
+        <p class="wholesermon__content--para">
+          This event will be On: <%= event.event_date %>
+        </p>
         <p class="wholesermon__content--para"><%= event.description %></p>
       </div>
     </section>

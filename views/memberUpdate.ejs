@@ -1,0 +1,42 @@
+<%- include("head") %>
+<body class="container">
+  <!-- Header section -->
+  <%- include("header") %>
+  <main>
+    <div class="createModify__content">
+    <div class="createModify__content">
+          <div class="createModify__content--form__page--field">
+            <input type="text" hidden id="id" name="id" value="<%=member[0]._id%>"/>
+      </div>
+      <form class="createModify__content--form" name="update">
+        <!-- First page starts here -->
+        <div class="createModify__content--form__page">
+          <h3 class="createModify__content--form__page--title">Update Member</h3>
+          <!-- Sermon Title -->
+          <div class="createModify__content--form__page--field">
+            <label for="member-name">Member's Name</label>
+            <input type="text" id="member-name" name="member_name" value="<%=member[0].member_name%>"/>
+          </div>
+          <!-- Bible Verse -->
+          <div class="createModify__content--form__page--field">
+            <label for="member-image">Member's Image</label>
+            <input type="file" id="member-image" name="photo" value="<%=member[0].photo%>"/>
+          </div>
+          <!-- Description -->
+          <div class="createModify__content--form__page--field">
+            <label for="member-opinion">What The Member Say</label>
+            <textarea name="member_opinion" id="member-opinion"><%=member[0].member_opinion %></textarea>
+          </div>
+          <!-- Submit button -->
+          <div class="createModify__content--form__page--field">
+            <button class="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    </div>
+  </main>
+
+    <%- include("footer") %>
+  </body>
+</html>

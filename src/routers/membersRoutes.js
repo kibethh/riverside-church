@@ -14,6 +14,13 @@ router.post(
 );
 router.get('/', membersController.getmembers);
 router.get('/:id', authController.protect, membersController.searchmembers);
-router.patch('/:id', authController.protect, membersController.updatemembers);
+router.patch(
+  '/:id',
+  authController.protect,
+  membersController.uploadMemberPhoto,
+  membersController.resizeMemberPhoto,
+  authController.authMember,
+  membersController.updatemembers
+);
 router.delete('/:id', authController.protect, membersController.removemembers);
 module.exports = router;
