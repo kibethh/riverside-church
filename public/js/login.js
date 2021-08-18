@@ -10,8 +10,11 @@ export const login = async (data) => {
     });
 
     if (response.status === 200) {
-      showAlert('success', 'Login success');
-      location.assign('/admin');
+      setTimeout(() => {
+        showAlert('success', 'Login success');
+        location.assign('/admin');
+      }, 2000);
+
       return;
     }
 
