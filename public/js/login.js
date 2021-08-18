@@ -10,8 +10,6 @@ export const login = async (data) => {
     });
 
     if (response.status === 200) {
-      const jsonResp = await response.json();
-      console.log(jsonResp.status);
       showAlert('success', 'Login success');
       location.assign('/admin');
       return;

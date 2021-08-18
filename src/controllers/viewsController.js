@@ -251,14 +251,11 @@ exports.index = catchAsync(async (req, res, next) => {
       'gallery-10.jpg',
     ];
   }
-  const featuresMember = new APIFeatures(Members.find(), {
-    department: 'general',
-  })
-    .filter()
-    .sort();
+  const featuresMember = new APIFeatures(Members.find(), {}).filter().sort();
 
   const members = await featuresMember.query;
 
+  console.log(members.length);
   if (members.length >= 3) {
     const disp = [...members];
     const dispSet = new Set();
@@ -281,19 +278,19 @@ exports.index = catchAsync(async (req, res, next) => {
       member_name: 'Anonymous 1',
       member_opinion:
         'This church has been a blessing to everyone in my family.',
-      photo: '/testimonial-1',
+      photo: 'default.jpeg',
     },
     {
       member_name: 'Anonymous 2',
       member_opinion:
         'This church has been a blessing to everyone in my family.',
-      photo: '/testimonial-2',
+      photo: 'default.jpeg',
     },
     {
       member_name: 'Anonymous 3',
       member_opinion:
         'This church has been a blessing to everyone in my family.',
-      photo: '/testimonial-3',
+      photo: 'default.jpeg',
     },
   ];
   res.status(200).render('index', {
@@ -315,6 +312,11 @@ exports.aboutPage = (req, res) => {
   res.render('about');
 };
 exports.modifySermonPage = catchAsync(async (req, res) => {
+  let sermonCount = await Sermon.countDocuments();
+  let page = 1;
+  if (req.query.page) {
+    page = req.query.page;
+  }
   const features = new APIFeatures(Sermon.find(), req.query)
     .filter()
     .sort()
@@ -324,6 +326,8 @@ exports.modifySermonPage = catchAsync(async (req, res) => {
   const sermons = await features.query;
   res.render('modifySermon', {
     sermons,
+    sermonCount,
+    page,
   });
 });
 exports.modifySermon = catchAsync(async (req, res) => {
@@ -337,6 +341,11 @@ exports.modifySermon = catchAsync(async (req, res) => {
   });
 });
 exports.modifyMemberPage = catchAsync(async (req, res) => {
+  let membersCount = await Members.countDocuments();
+  let page = 1;
+  if (req.query.page) {
+    page = req.query.page;
+  }
   const features = new APIFeatures(Members.find(), req.query)
     .filter()
     .sort()
@@ -346,6 +355,8 @@ exports.modifyMemberPage = catchAsync(async (req, res) => {
   const members = await features.query;
   res.render('modifyMember', {
     members,
+    membersCount,
+    page,
   });
 });
 exports.modifyMember = catchAsync(async (req, res) => {
@@ -359,6 +370,11 @@ exports.modifyMember = catchAsync(async (req, res) => {
   });
 });
 exports.modifyEventPage = catchAsync(async (req, res) => {
+  let eventsCount = await Event.countDocuments();
+  let page = 1;
+  if (req.query.page) {
+    page = req.query.page;
+  }
   const features = new APIFeatures(Event.find(), req.query)
     .filter()
     .sort()
@@ -368,6 +384,8 @@ exports.modifyEventPage = catchAsync(async (req, res) => {
   const events = await features.query;
   res.render('modifyEvent', {
     events,
+    eventsCount,
+    page,
   });
 });
 exports.modifyEvent = catchAsync(async (req, res) => {
@@ -381,6 +399,11 @@ exports.modifyEvent = catchAsync(async (req, res) => {
   });
 });
 exports.modifyNewsPage = catchAsync(async (req, res) => {
+  let newsCount = await News.countDocuments();
+  let page = 1;
+  if (req.query.page) {
+    page = req.query.page;
+  }
   const features = new APIFeatures(News.find(), req.query)
     .filter()
     .sort()
@@ -389,7 +412,9 @@ exports.modifyNewsPage = catchAsync(async (req, res) => {
 
   const news = await features.query;
   res.render('modifyNews', {
+    newsCount,
     news,
+    page,
   });
 });
 exports.modifyNews = catchAsync(async (req, res) => {
@@ -403,6 +428,11 @@ exports.modifyNews = catchAsync(async (req, res) => {
   });
 });
 exports.modifyDepartmentPage = catchAsync(async (req, res) => {
+  let departmentCount = await Department.countDocuments();
+  let page = 1;
+  if (req.query.page) {
+    page = req.query.page;
+  }
   const features = new APIFeatures(Department.find(), req.query)
     .filter()
     .sort()
@@ -412,6 +442,8 @@ exports.modifyDepartmentPage = catchAsync(async (req, res) => {
   const departments = await features.query;
   res.render('modifyDepartment', {
     departments,
+    departmentCount,
+    page,
   });
 });
 exports.modifyDepartments = catchAsync(async (req, res) => {

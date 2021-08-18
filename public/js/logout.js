@@ -1,6 +1,6 @@
 import { showAlert } from './alerts';
 
-export const logout = async (data) => {
+export const logout = async () => {
   try {
     const response = await fetch('/api/v1/logout', {
       method: 'GET',
@@ -10,7 +10,8 @@ export const logout = async (data) => {
     if (jsonResp.status === 'success') {
       showAlert('success', 'Logout  success');
       window.setTimeout(() => {
-        history.go();
+        // history.go();
+        location.assign('/login');
       }, 1500);
       return;
     }

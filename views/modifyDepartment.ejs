@@ -16,6 +16,27 @@
 
   </div>
   <%}%>
+
+    <!-- Page Buttons -->
+      <section class="page-btns">
+        <div class="page-btns-container">
+          <button class="page-btns-container__prev">Prev</button>
+          <% for(let i=1;i<=(Math.ceil(departmentCount/4));i++){%>
+          <!-- /////////////////////////////// -->
+          <% const activeOrNot = (i== page) ? 'active' :''; %>
+
+          <button
+            class="page-btns-container__item <%= activeOrNot %>"
+            data-page="<%=i%>"
+          >
+            Page <%=i%>
+          </button>
+
+          <%}%>
+
+          <button class="page-btns-container__next">Next</button>
+        </div>
+      </section>
 </main>
 
     <%- include("footer") %>
