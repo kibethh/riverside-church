@@ -1,27 +1,56 @@
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Google fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
+<header class="header">
+  <div class="header__menu">
+    <!-- Hamburger lines container -->
+    <div class="header__menu--line"></div>
+  </div>
+  <div class="header__overlay">
+    <!-- Navigation -->
+    <nav class="header__nav">
+      <a href="/" class="header__nav--logo">
+        <i class="fas fa-church icons"></i>
+      </a>
+      <ul class="header__nav--links">
+        <li class="header__nav--links__item">
+          <a href="/" data-text="Home">Home</a>
+        </li>
+        <li class="header__nav--links__item">
+          <a href="/about" data-text="About">About</a>
+        </li>
+        <li class="header__nav--links__item">
+          <a href="#" data-text="Departments">Departments</a>
+          <ul class="header__nav--links__item--submenu">
+            <li class="header__nav--links__item--submenu__item">
+              <a href="/departments/youth" data-text="Youth">Youth</a>
+            </li>
+            <li class="header__nav--links__item--submenu__item">
+              <a href="/departments/women" data-text="Women">Women</a>
+            </li>
+            <li class="header__nav--links__item--submenu__item">
+              <a href="/departments/men" data-text="Men">Men</a>
+            </li>
+            <li class="header__nav--links__item--submenu__item">
+              <a href="/departments/sundayschool" data-text="SundaySchool"
+                ><span>Sunday</span><span>School</span></a
+              >
+            </li>
+          </ul>
+        </li>
 
-  <!-- fontawesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-
-  <!-- favicon -->
-  <link rel="shortcut icon" href="./img/logo/favicon.svg" />
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="/css/main-style.css" />
-  <title>Riverside A.G.C| Bomet</title>
-</head>
+        <li class="header__nav--links__item">
+          <a href="/sermons" data-text="Sermons">Sermons</a>
+        </li>
+        <li class="header__nav--links__item">
+          <a href="#" data-text="Updates">Updates</a>
+          <ul class="header__nav--links__item--submenu">
+            <li class="header__nav--links__item--submenu__item">
+              <a href="/events" data-text="Events">Events</a>
+            </li>
+            <li class="header__nav--links__item--submenu__item">
+              <a href="/news" data-text="News">News</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
