@@ -8,14 +8,16 @@ export const login = async (data) => {
       },
       body: JSON.stringify(Object.fromEntries(data)),
     });
+    const jsonResp = await response.json();
 
-    if (response.status === 200) {
+    if (jsonResp.status === 'success') {
       showAlert('success', 'Login success');
-      location.href = '/admin';
+      setTimeout(() => {
+        location.href = '/admin';
+      }, 1500);
       return;
     }
 
-    const jsonResp = await response.json();
     showAlert('error', jsonResp.message);
   } catch (err) {
     showAlert('error', "Can't Login");

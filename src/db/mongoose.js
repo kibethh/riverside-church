@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
@@ -6,10 +6,7 @@ const DB = process.env.DATABASE.replace(
 );
 
 mongoose.connect(DB, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
 });
-
-
-
