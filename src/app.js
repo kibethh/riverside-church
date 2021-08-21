@@ -21,12 +21,12 @@ const showcaseRouter = require('./routers/showcaseRoutes');
 const galleryRouter = require('./routers/galleryRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const authController = require('./controllers/authController');
-
 //paths
 const publicDirectory = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../views');
 const app = express();
+// for heroku
+app.set('trust proxy', true);
 //Define paths for express config
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
@@ -72,17 +72,15 @@ app.use(
 //   console.log(req.cookies);
 //   next();
 // });
-app.use(authController.isLoggedIn);
-
-app.use('/domain.com', viewsRouter);
-app.use('/api.domain.com/v1/', userRouter);
-app.use('/api.domain.com/v1/sermons', sermonRouter);
-app.use('/api.domain.com/v1/news', newsRouter);
-app.use('/api.domain.com/v1/members', membersRouter);
-app.use('/api.domain.com/v1/departments', departmentRouter);
-app.use('/api.domain.com/v1/events', eventsRouter);
-app.use('/api.domain.com/v1/showcase', showcaseRouter);
-app.use('/api.domain.com/v1/gallery', galleryRouter);
+app.use('/', viewsRouter);
+app.use('/api/v1/', userRouter);
+app.use('/api/v1/sermons', sermonRouter);
+app.use('/api/v1/news', newsRouter);
+app.use('/api/v1/members', membersRouter);
+app.use('/api/v1/departments', departmentRouter);
+app.use('/api/v1/events', eventsRouter);
+app.use('/api/v1/showcase', showcaseRouter);
+app.use('/api/v1/gallery', galleryRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`));
