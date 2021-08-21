@@ -1,6 +1,13 @@
 <%- include("head") %>
 <!-- First page starts here -->
 <body>
+  <%if(user){ %>
+  <script>
+    document.location.href = '/admin';
+  </script>
+  <% } %>
+
+  <!-- ////////////////// -->
   <%- include("header") %>
   <section class="register">
     <!-- Register content -->
@@ -25,5 +32,6 @@
       </form>
     </div>
   </section>
+
   <%- include("footer") %>
 </body>

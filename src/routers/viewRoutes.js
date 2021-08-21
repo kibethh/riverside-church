@@ -29,7 +29,7 @@ router.get('/departments', viewsController.departments);
 
 router.get('/departments/:id', viewsController.viewDepartment);
 
-router.get('/admin', viewsController.adminPage);
+router.get('/admin', authController.protect, viewsController.adminPage);
 
 router.get(
   '/editSermons',

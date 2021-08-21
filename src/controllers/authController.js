@@ -24,7 +24,6 @@ const createSendToken = (user, statusCode, res) => {
 
   //Remove Password from the output
   user.password = undefined;
-
   res.cookie('jwt', token, cookieOptions);
   res.status(statusCode).json({
     status: 'success',
@@ -64,6 +63,7 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
   }
+
   //3. if everything is okay, send token to the client
   createSendToken(user, 200, res);
 });
