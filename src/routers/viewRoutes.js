@@ -3,7 +3,6 @@ const viewsController = require('../controllers/viewsController');
 const authController = require('../controllers/authController');
 const router = express.Router();
 
-
 router.get('/', viewsController.index);
 
 router.get('/login', viewsController.loginPage);
@@ -28,7 +27,7 @@ router.get('/departments', viewsController.departments);
 
 router.get('/departments/:id', viewsController.viewDepartment);
 
-router.get('/admin', authController.protect, viewsController.adminPage);
+router.get('/admin', viewsController.adminPage);
 
 router.get(
   '/editSermons',
