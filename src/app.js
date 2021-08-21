@@ -9,6 +9,10 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const ejs = require('ejs');
+const authController = require('../controllers/authController');
+
+// checking if there is logged in user
+app.use(authController.isLoggedIn);
 
 const viewsRouter = require('./routers/viewRoutes');
 const userRouter = require('./routers/userRoutes');
@@ -21,7 +25,6 @@ const showcaseRouter = require('./routers/showcaseRoutes');
 const galleryRouter = require('./routers/galleryRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const authController = require('./controllers/authController');
 
 //paths
 const publicDirectory = path.join(__dirname, '../public');
@@ -72,8 +75,6 @@ app.use(
 //   console.log(req.cookies);
 //   next();
 // });
-// checking if there is logged in user
-app.use(authController.isLoggedIn);
 
 app.use('/', viewsRouter);
 app.use('/api/v1/', userRouter);
