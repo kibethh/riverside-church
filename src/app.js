@@ -8,7 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
-// const proxyaddr = require('proxy-addr');
+const cors = require('cors');
 const ejs = require('ejs');
 
 const viewsRouter = require('./routers/viewRoutes');
@@ -26,11 +26,12 @@ const globalErrorHandler = require('./controllers/errorController');
 const publicDirectory = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../views');
 const app = express();
-// for heroku
 //Define paths for express config
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 //Global middlewares
+app.use(cors());
+app.options('*', cors());
 //SET security HTTP headers
 app.use(helmet());
 //Development logging
