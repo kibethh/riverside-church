@@ -1,7 +1,7 @@
 import { showAlert } from './alerts';
 export const login = async (data) => {
   try {
-    const response = await fetch('/api/v1/login', {
+    const response = await fetch('/api.domain.com/v1/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ export const login = async (data) => {
     if (jsonResp.status === 'success') {
       showAlert('success', 'Login success');
       setTimeout(() => {
-        location.href = '/admin';
+        location.href = '/domain.com/admin';
       }, 1500);
       return;
     }
