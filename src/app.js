@@ -9,7 +9,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const ejs = require('ejs');
-const authController = require('../controllers/authController');
+const authController = require('./controllers/authController');
 
 // checking if there is logged in user
 app.use(authController.isLoggedIn);
