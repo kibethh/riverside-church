@@ -73,15 +73,16 @@ app.use(
 //   next();
 // });
 app.use(authController.isLoggedIn);
-app.use('/', viewsRouter);
-app.use('/api/v1/', userRouter);
-app.use('/api/v1/sermons', sermonRouter);
-app.use('/api/v1/news', newsRouter);
-app.use('/api/v1/members', membersRouter);
-app.use('/api/v1/departments', departmentRouter);
-app.use('/api/v1/events', eventsRouter);
-app.use('/api/v1/showcase', showcaseRouter);
-app.use('/api/v1/gallery', galleryRouter);
+
+app.use('/domain.com', viewsRouter);
+app.use('/api.domain.com/v1/', userRouter);
+app.use('/api.domain.com/v1/sermons', sermonRouter);
+app.use('/api.domain.com/v1/news', newsRouter);
+app.use('/api.domain.com/v1/members', membersRouter);
+app.use('/api.domain.com/v1/departments', departmentRouter);
+app.use('/api.domain.com/v1/events', eventsRouter);
+app.use('/api.domain.com/v1/showcase', showcaseRouter);
+app.use('/api.domain.com/v1/gallery', galleryRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`));
