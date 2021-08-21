@@ -300,7 +300,8 @@ exports.index = catchAsync(async (req, res, next) => {
 });
 
 exports.loginPage = (req, res) => {
-  res.render('login');
+  let user = req.user;
+  res.render('login', { user });
 };
 exports.tithesPage = (req, res) => {
   res.render('tithes');
