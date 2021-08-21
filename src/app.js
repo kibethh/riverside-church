@@ -26,7 +26,7 @@ const publicDirectory = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../views');
 const app = express();
 // for heroku
-app.set('trust proxy', true);
+app.set('trust proxy');
 //Define paths for express config
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
