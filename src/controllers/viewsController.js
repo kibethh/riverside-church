@@ -300,14 +300,13 @@ exports.index = catchAsync(async (req, res, next) => {
 });
 
 exports.loginPage = (req, res) => {
-  let user = req.user;
-  res.render('login', { user });
+  res.render('login', { user: req.user });
 };
 exports.tithesPage = (req, res) => {
   res.render('tithes');
 };
 exports.adminPage = (req, res) => {
-  res.render('admin');
+  res.render('admin', { user: req.user });
 };
 exports.aboutPage = (req, res) => {
   res.render('about');

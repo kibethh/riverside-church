@@ -10,12 +10,6 @@ const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const ejs = require('ejs');
 
-const app = express();
-const authController = require('./controllers/authController');
-
-// // checking if there is logged in user
-app.use(authController.isLoggedIn);
-
 const viewsRouter = require('./routers/viewRoutes');
 const userRouter = require('./routers/userRoutes');
 const sermonRouter = require('./routers/sermonRoutes');
@@ -27,11 +21,10 @@ const showcaseRouter = require('./routers/showcaseRoutes');
 const galleryRouter = require('./routers/galleryRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-
 //paths
 const publicDirectory = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../views');
-
+const app = express();
 //Define paths for express config
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
@@ -77,7 +70,6 @@ app.use(
 //   console.log(req.cookies);
 //   next();
 // });
-
 app.use('/', viewsRouter);
 app.use('/api/v1/', userRouter);
 app.use('/api/v1/sermons', sermonRouter);
