@@ -4,6 +4,7 @@
   <%- include("header") %>
     <!-- Sermon Modification And Creation section -->
     <%if(user){%>
+      <%console.log("hello user")%>
     <section class="create">
       <h1>Admin Panel</h1>
        <!-- Submit button -->
@@ -211,8 +212,10 @@
         </form>
       </div>
     </section>
-    <%}else{ %>
+    <%} %>
+    <%if(!user){ %>
     <script> document.location.href = '/login' </script>
+    <% console.log("heyy")%>
     <% } %>
 
     <%- include("footer") %>

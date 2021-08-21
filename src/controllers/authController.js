@@ -63,7 +63,7 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
   }
-
+  res.locals.user = user;
   //3. if everything is okay, send token to the client
   createSendToken(user, 200, res);
 });
@@ -150,7 +150,7 @@ exports.isLoggedIn = async (req, res, next) => {
       res.locals.user = currentUser;
       return next();
     }
-    // res.locals.user = '';
+    res.locals.user = '';
   } catch (err) {
     return next();
   }
