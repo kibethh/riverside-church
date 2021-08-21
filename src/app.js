@@ -9,10 +9,12 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const ejs = require('ejs');
-// const authController = require('./controllers/authController');
+
+const app = express();
+const authController = require('./controllers/authController');
 
 // // checking if there is logged in user
-// app.use(authController.isLoggedIn);
+app.use(authController.isLoggedIn);
 
 const viewsRouter = require('./routers/viewRoutes');
 const userRouter = require('./routers/userRoutes');
@@ -29,7 +31,7 @@ const globalErrorHandler = require('./controllers/errorController');
 //paths
 const publicDirectory = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../views');
-const app = express();
+
 //Define paths for express config
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
