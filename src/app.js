@@ -21,6 +21,8 @@ const showcaseRouter = require('./routers/showcaseRoutes');
 const galleryRouter = require('./routers/galleryRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+const authController = require('../controllers/authController');
+
 //paths
 const publicDirectory = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../views');
@@ -70,6 +72,9 @@ app.use(
 //   console.log(req.cookies);
 //   next();
 // });
+// checking if there is logged in user
+app.use(authController.isLoggedIn);
+
 app.use('/', viewsRouter);
 app.use('/api/v1/', userRouter);
 app.use('/api/v1/sermons', sermonRouter);
