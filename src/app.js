@@ -21,7 +21,7 @@ const showcaseRouter = require('./routers/showcaseRoutes');
 const galleryRouter = require('./routers/galleryRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-const authController = require('../controllers/authController');
+const authController = require('./controllers/authController');
 
 //paths
 const publicDirectory = path.join(__dirname, '../public');
