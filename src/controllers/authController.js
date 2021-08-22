@@ -63,8 +63,10 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
   }
-  res.locals.user = user;
+
   //3. if everything is okay, send token to the client
+  req.session.user = user;
+
   createSendToken(user, 200, res);
 });
 
@@ -82,70 +84,114 @@ exports.authMember = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.logout = (req, res) => {
-  res.cookie('jwt', 'loggedout', {
-    expires: new Date(Date.now() + 1 * 1000),
-    httpOnly: true,
+exports.logout = catchAsync(async (req, res, next) => {
+  await req.session.destroy(() => {
+    return next(new AppError("Couldn't Logout", 401));
   });
   res.status(200).json({ status: 'success' });
-};
+});
+// exports.logout = (req, res) => {
+//   res.cookie('jwt', 'loggedout', {
+//     expires: new Date(Date.now() + 1 * 1000),
+//     httpOnly: true,
+//   });
+//   res.status(200).json({ status: 'success' });
+// };
 
 exports.protect = catchAsync(async (req, res, next) => {
   //1. Getting the token and checking if it exists
-  let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
-    token = req.headers.authorization.split(' ')[1];
-  } else if (req.cookies.jwt) {
-    token = req.cookies.jwt;
-  }
+  // let token;
+  // if (
+  //   req.headers.authorization &&
+  //   req.headers.authorization.startsWith('Bearer')
+  // ) {
+  //   token = req.headers.authorization.split(' ')[1];
+  // } else if (req.cookies.jwt) {
+  //   token = req.cookies.jwt;
+  // }
   // console.log(token);
 
-  if (!token) {
+  if (!req.session.user) {
     return next(
       new AppError('You are not logged in! Please login to get access.', 401)
     );
   }
   //2. verification of the token
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  // const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   //3. check if user still exists
-  const currentUser = await User.findById(decoded.id);
+  const currentUser = await User.findById(req.session.user._id);
   if (!currentUser) {
     return next(
       new AppError('The user belonging to this token does not exist', 401)
     );
   }
   //4. check if user changed passwords after the token was issued
-  if (currentUser.changedPasswordAfter(decoded.iat)) {
-    return next(
-      new AppError('User recently changed password!!Please login again.', 401)
-    );
-  }
+  // if (currentUser.changedPasswordAfter(decoded.iat)) {
+  //   return next(
+  //     new AppError('User recently changed password!!Please login again.', 401)
+  //   );
+  // }
   //GRANT ACCESS TO PROTECTED ROUTE
   req.user = currentUser;
   next();
 });
+// exports.protect = catchAsync(async (req, res, next) => {
+//   //1. Getting the token and checking if it exists
+//   let token;
+//   if (
+//     req.headers.authorization &&
+//     req.headers.authorization.startsWith('Bearer')
+//   ) {
+//     token = req.headers.authorization.split(' ')[1];
+//   } else if (req.cookies.jwt) {
+//     token = req.cookies.jwt;
+//   }
+//   // console.log(token);
+
+//   if (!token) {
+//     return next(
+//       new AppError('You are not logged in! Please login to get access.', 401)
+//     );
+//   }
+//   //2. verification of the token
+//   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+//   //3. check if user still exists
+//   const currentUser = await User.findById(decoded.id);
+//   if (!currentUser) {
+//     return next(
+//       new AppError('The user belonging to this token does not exist', 401)
+//     );
+//   }
+//   //4. check if user changed passwords after the token was issued
+//   if (currentUser.changedPasswordAfter(decoded.iat)) {
+//     return next(
+//       new AppError('User recently changed password!!Please login again.', 401)
+//     );
+//   }
+//   //GRANT ACCESS TO PROTECTED ROUTE
+//   req.user = currentUser;
+//   next();
+// });
 
 //Only for rendered pages, no errors
 exports.isLoggedIn = async (req, res, next) => {
   try {
-    if (req.cookies.jwt) {
+    if (req.session.user) {
+      console.log(req.session.user);
       //1. verification of the token
-      const decoded = await promisify(jwt.verify)(
-        req.cookies.jwt,
-        process.env.JWT_SECRET
-      );
+      // const decoded = await promisify(jwt.verify)(
+      //   req.cookies.jwt,
+      //   process.env.JWT_SECRET
+      // );
       //2. check if user still exists
-      const currentUser = await User.findById(decoded.id);
+      const currentUser = await User.findById(req.session.user._id);
       if (!currentUser) {
         return next();
       }
       //3. check if user changed passwords after the token was issued
-      if (currentUser.changedPasswordAfter(decoded.iat)) {
-        return next();
-      }
+      // if (currentUser.changedPasswordAfter(decoded.iat)) {
+      //   return next();
+      // }
       //There is a logged in user
       res.locals.user = currentUser;
       return next();
@@ -156,6 +202,33 @@ exports.isLoggedIn = async (req, res, next) => {
   }
   next();
 };
+// exports.isLoggedIn = async (req, res, next) => {
+//   try {
+//     if (req.cookies.jwt) {
+//       //1. verification of the token
+//       const decoded = await promisify(jwt.verify)(
+//         req.cookies.jwt,
+//         process.env.JWT_SECRET
+//       );
+//       //2. check if user still exists
+//       const currentUser = await User.findById(decoded.id);
+//       if (!currentUser) {
+//         return next();
+//       }
+//       //3. check if user changed passwords after the token was issued
+//       if (currentUser.changedPasswordAfter(decoded.iat)) {
+//         return next();
+//       }
+//       //There is a logged in user
+//       res.locals.user = currentUser;
+//       return next();
+//     }
+//     res.locals.user = '';
+//   } catch (err) {
+//     return next();
+//   }
+//   next();
+// };
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
     //roles ["admin","lead-guide"]. role="user"

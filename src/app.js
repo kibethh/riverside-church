@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
@@ -26,12 +28,30 @@ const globalErrorHandler = require('./controllers/errorController');
 const publicDirectory = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../views');
 const app = express();
+const DB = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
+const store = new MongoDBStore({
+  uri: DB,
+  collection: 'sessions',
+});
+
 //Define paths for express config
 app.set('view engine', 'ejs');
 app.set('views', viewsPath);
 //Global middlewares
 app.use(cors());
 app.options('*', cors());
+// sessions
+app.use(
+  session({
+    secret: 'mysecretshouldbelong',
+    resave: false,
+    saveUninitialized: false,
+    store,
+  })
+);
 //SET security HTTP headers
 app.use(helmet());
 //Development logging
