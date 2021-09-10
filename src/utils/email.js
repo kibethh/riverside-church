@@ -1,6 +1,7 @@
 const path = require('path');
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
+const pug = require('pug');
 const htmlToText = require('html-to-text');
 const viewsPath = path.join(__dirname, '../views');
 module.exports = class Email {
@@ -30,7 +31,12 @@ module.exports = class Email {
   // Send the actual email
   async send(template, subject) {
     //1. Render HTML based on a template
-    // const html = pug.renderFile(`${viewsPath}/emails/${template}.ejs`, {
+    console.log(__dirname);
+    console.log(viewsPath);
+    // console.log(`${viewsPath}/email/`);
+
+    // const html = ejs.renderFile(`${viewsPath}/emails/${template}.ejs`, {
+    // const html = pug.renderFile(`${viewsPath}/${template}.pug`, {
     //   firstName: this.firstName,
     //   url: this.url,
     //   subject,
@@ -41,7 +47,7 @@ module.exports = class Email {
       to: this.to,
       subject,
       // html,
-      text: 'htmlToText.fromString(html)',
+      text: 'htmlToText(html, { wordwrap: null })',
     };
     //3. Create a transport and send email
     this.newTransport();

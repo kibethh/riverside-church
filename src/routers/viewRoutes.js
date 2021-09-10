@@ -31,6 +31,8 @@ router.get('/departments/:id', viewsController.viewDepartment);
 
 router.get('/admin', viewsController.adminPage);
 
+router.get('/status', viewsController.paymentStatus);
+
 router.get(
   '/editSermons',
   authController.protect,

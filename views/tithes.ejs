@@ -6,26 +6,38 @@
 
     <!-- tithes section -->
     <!-- <section class="tithesandoffering"> -->
-    <section class="tithes">
-      <!-- Content -->
-      <div class="tithes__content">
-        <!-- <i class="fab fa-accessible-icon icons"></i> -->
-        <h2 class="tithes__content--title">Tithes and Offerings</h2>
-        <h3 class="tithes__content--heading">procedure</h3>
+    <section class="register">
+      <!-- Register content -->
+      <div class="register__content">
+        <form class="register__content--form" name="payment">
+          <div class="register__content--form__page">
+            <!-- UserName -->
+            <div class="register__content--form__page--field">
+              <label for="phone">Your M-Pesa Phone Number</label>
+              <input
+                type="number"
+                id="phone"
+                name="phone"
+                placeholder="e.g 0712345678"
+              />
+            </div>
+            <!-- Amount -->
+            <div class="register__content--form__page--field">
+              <label for="amount">Offering Amount</label>
+              <input
+                type="number"
+                id="amount"
+                name="amount"
+                placeholder="Amount"
+              />
+            </div>
 
-        <div class="tithes__content--para">
-          <ul class="tithes__content--para__list">
-            <li class="tithes__content--para__list--item">procedure 1</li>
-            <li class="tithes__content--para__list--item">procedure 2</li>
-            <li class="tithes__content--para__list--item">procedure 3</li>
-            <li class="tithes__content--para__list--item">procedure 4</li>
-            <li class="tithes__content--para__list--item">procedure 5</li>
-            <li class="tithes__content--para__list--item">procedure 6</li>
-            <li class="tithes__content--para__list--item">procedure 7</li>
-          </ul>
-        </div>
-
-        <!-- <h2 class="tithes__content--title">By: Someone</h2> -->
+            <!--  button -->
+            <div class="register__content--form__page--field">
+              <button>Start Transaction</button>
+            </div>
+          </div>
+        </form>
       </div>
     </section>
     <!-- Scroll to top button -->

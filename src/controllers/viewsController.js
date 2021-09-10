@@ -311,6 +311,9 @@ exports.adminPage = (req, res) => {
 exports.aboutPage = (req, res) => {
   res.render('about');
 };
+exports.paymentStatus = (req, res) => {
+  console.log(req.query, 'status');
+};
 exports.modifySermonPage = catchAsync(async (req, res) => {
   let sermonCount = await Sermon.countDocuments();
   let page = 1;
