@@ -8,6 +8,11 @@ const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
 
 exports.dataIntoReqBody = catchAsync(async (req, res, next) => {
+  if (!req.body.phone || req.body.amount) {
+    return next(
+      new AppError('Please provide a phone number and amount!!', 400)
+    );
+  }
   const phone = req.body.phone;
   const amount = req.body.amount;
   const nextUrl = `/api/v1/payment/mpesa?phone=${phone}&amount=${amount}`;
