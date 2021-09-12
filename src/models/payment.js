@@ -1,8 +1,20 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const paymentSchema = new mongoose.Schema({
-  details: {
-    type: Array,
+  amount: {
+    type: String,
+    required: true,
+  },
+  transactionId: {
+    type: String,
+    required: true,
+  },
+  transactionDate: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
     required: true,
   },
 });

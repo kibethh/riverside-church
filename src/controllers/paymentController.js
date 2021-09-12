@@ -79,7 +79,8 @@ exports.lipaNaMpesaOnline = catchAsync(async (req, res) => {
     PartyA: PhoneNumber,
     PartyB: 174379,
     PhoneNumber,
-    CallBackURL: process.env.CallBackURL + '/api/v1/payment/mpesastatus',
+    CallBackURL:
+      'https://240e-105-160-64-83.ngrok.io/api/v1/payment/mpesastatus',
     AccountReference: 'test',
     TransactionDesc: 'test',
   };
@@ -102,14 +103,26 @@ exports.lipaNaMpesaOnline = catchAsync(async (req, res) => {
 exports.paymentStatus = catchAsync(async (req, res, next) => {
   const {
     Body: {
-      stkCallback: { ResultDesc, CallbackMetadata },
+      stkCallback: {
+        CallbackMetadata: { Item },
+      },
     },
   } = req.body;
+  // Object to insert array items
+  const newObj = {};
+  Item.forEach((ob) => {
+    if (ob.Value) newObj[ob.Name] = ob.Value;
+  });
+
   if (CallbackMetadata) {
     await Payment.create({
-      details: CallbackMetadata.Item,
+      amount: newObj.Amount,
+      transactionId: newObj.MpesaReceiptNumber,
+      transactionDate: newObj.TransactionDate,
+      phone: newObj.PhoneNumber,
     });
   }
+  console.log('Success');
 
   res.status(200).json({
     success: true,

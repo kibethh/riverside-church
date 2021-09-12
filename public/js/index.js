@@ -28,7 +28,6 @@ const departmentForm = document.forms.department;
 const showcaseForm = document.forms.showcase;
 // payment form
 const paymentForm = document.forms.payment;
-const button = document.querySelector('button');
 // admin logout
 const logoutBtn = document.querySelector('.logout');
 // delete
@@ -329,34 +328,7 @@ if (deleteBtns)
 if (paymentForm)
   paymentForm.addEventListener('submit', (e) => {
     e.preventDefault();
+
     const data = new FormData(paymentForm);
-    button.textContent = 'Processing...';
-    setTimeout(() => {
-      button.style.display = 'none';
-      const markup = `<section class="tithes">
-      <div class="tithes__content">
-        <h2 class="tithes__content--title">Thank You!! May God Bless, You will be prompted to enter your M-PESA PIN,If Not prompted,refresh and try again!!</h2>
-        <div class="tithes__content--para">
-          <ul class="tithes__content--para__list">
-            <li class="tithes__content--para__list--item">Giving obeys God’s command</li>
-            <li class="tithes__content--para__list--item">
-              Giving submits to God’s Lordship
-            </li>
-            <li class="tithes__content--para__list--item">Giving exhibits God’s heart</li>
-            <li class="tithes__content--para__list--item">Giving illustrates God’s salvation</li>
-            <li class="tithes__content--para__list--item">Giving trusts God’s provision</li>
-          </ul>
-          <ul class="tithes__content--para__list">
-            <li class="tithes__content--para__list--item">Giving widens God’s smile</li>
-            <li class="tithes__content--para__list--item">Giving advances God’s kingdom</li>
-            <li class="tithes__content--para__list--item">Giving promotes God’s sanctification</li>
-            <li class="tithes__content--para__list--item">Giving testifies to God’s power</li>
-            <li class="tithes__content--para__list--item">Giving praises God’s character</li>
-          </ul>
-        </div>
-      </div>
-    </section>`;
-      document.querySelector('body').innerHTML = markup;
-    }, 1500);
     pay(data);
   });
