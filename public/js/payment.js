@@ -1,3 +1,5 @@
+import { showAlert } from './alerts';
+
 export const pay = async (data) => {
   try {
     const resp = await fetch('/api/v1/payment/userdata', {
@@ -9,10 +11,11 @@ export const pay = async (data) => {
     });
     if (resp.status === 200) {
       const button = document.querySelector('button');
+      const detailsInput = document.querySelector('.register');
       button.textContent = 'Processing...';
       setTimeout(() => {
-        button.style.display = 'none';
-      }, 1500);
+        button.remove();
+      }, 500);
       const markup = `<section class="tithes">
       <div class="tithes__content">
         <h2 class="tithes__content--title">Thank You!! May God Bless, You will be prompted to enter your M-PESA PIN,If Not prompted,refresh and try again!!</h2>
@@ -36,15 +39,21 @@ export const pay = async (data) => {
         </div>
       </div>
     </section>`;
-      document.querySelector('body').innerHTML = markup;
+    setTimeout(() => {
+      detailsInput.remove();
+      document.querySelector('header').insertAdjacentHTML("afterend",markup) ;
+    }, 5000);
+      
       const status = await resp.json();
       const msg = status.data.CustomerMessage.split('.')[1];
-      register.style.display = 'none';
       showAlert('success', msg);
       setTimeout(() => {
         location.assign('/');
       }, 10000);
+      return;
     }
+    const stat= await resp.json();
+    showAlert('error', stat.message);
   } catch (err) {
     showAlert('error', 'Please try again later!!');
   }
