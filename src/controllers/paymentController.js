@@ -26,7 +26,7 @@ exports.getOAuthToken = catchAsync(async (req, res, next) => {
   let buffer = new Buffer.from(consumer_key + ':' + consumer_secret);
 
   let auth = `Basic ${buffer.toString('base64')}`;
- 
+
   let { data } = await axios.get(
     'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials',
     {
@@ -40,7 +40,6 @@ exports.getOAuthToken = catchAsync(async (req, res, next) => {
   req.data = req.query;
   req.token = data['access_token'];
   return next();
-  
 });
 
 exports.lipaNaMpesaOnline = catchAsync(async (req, res) => {
@@ -71,7 +70,6 @@ exports.lipaNaMpesaOnline = catchAsync(async (req, res) => {
 
   let Password = buffer.toString('base64');
 
-  
   const payLoad = {
     BusinessShortCode: 174379,
     Password,
@@ -80,8 +78,8 @@ exports.lipaNaMpesaOnline = catchAsync(async (req, res) => {
     Amount,
     PartyA: PhoneNumber,
     PartyB: 174379,
-   PhoneNumber,
-    CallBackURL:process.env.CallBackURL+'/api/v1/payment/mpesastatus',
+    PhoneNumber,
+    CallBackURL: process.env.CallBackURL + '/api/v1/payment/mpesastatus',
     AccountReference: 'test',
     TransactionDesc: 'test',
   };
@@ -102,17 +100,13 @@ exports.lipaNaMpesaOnline = catchAsync(async (req, res) => {
 });
 
 exports.paymentStatus = catchAsync(async (req, res, next) => {
-  console.log(req.body)
   const {
     Body: {
-      stkCallback: {
-        CallbackMetadata,
-      },
+      stkCallback: { CallbackMetadata },
     },
   } = req.body;
-  
-  if (CallbackMetadata) {
 
+  if (CallbackMetadata) {
     const {
       Body: {
         stkCallback: {
@@ -120,13 +114,12 @@ exports.paymentStatus = catchAsync(async (req, res, next) => {
         },
       },
     } = req.body;
-    
 
     // Object to insert array items
-  const newObj = {};
-  Item.forEach((ob) => {
-    if (ob.Value) newObj[ob.Name] = ob.Value;
-  });
+    const newObj = {};
+    Item.forEach((ob) => {
+      if (ob.Value) newObj[ob.Name] = ob.Value;
+    });
 
     await Payment.create({
       amount: newObj.Amount,
@@ -138,6 +131,6 @@ exports.paymentStatus = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-  //   ResultDesc,
+    //   ResultDesc,
   });
 });

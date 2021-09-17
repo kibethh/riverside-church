@@ -11,7 +11,7 @@ router.get('/login', viewsController.loginPage);
 
 router.get('/about', viewsController.aboutPage);
 
-router.get('/tithes', viewsController.tithesPage);
+router.get('/give', viewsController.tithesPage);
 
 router.get('/sermons', viewsController.getSermons);
 
