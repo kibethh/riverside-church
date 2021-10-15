@@ -88,7 +88,6 @@ for (let i = 0; i < btns.length; i++) {
   btns[i].addEventListener('click', function (e) {
     e.preventDefault();
     const filter = e.target.dataset.filter;
-    console.log(location.search);
     let params = new URLSearchParams(location.search);
     params.set('month', filter);
 
@@ -111,8 +110,7 @@ for (let i = 0; i < pageBtns.length; i++) {
     pageBtns[i].addEventListener('click', function (e) {
       e.preventDefault();
       let page = e.target.dataset.page;
-      console.log(location.search);
-      console.log(page);
+
       let params = new URLSearchParams(location.search);
       params.set('page', page);
 
@@ -253,7 +251,6 @@ if (updateForm)
   updateForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = new FormData(updateForm);
-    console.log(Object.fromEntries(data));
     let id = document.querySelector('#id').value;
 
     if (location.href.indexOf('Sermon') != -1) updateSermon(data, id);
@@ -310,11 +307,9 @@ if (deleteBtns)
   for (let i = 0; i < deleteBtns.length; i++) {
     deleteBtns[i].addEventListener('click', function (e) {
       e.preventDefault();
-      console.log('clicked');
       let id;
       // alert(location.href);
       // alert(location.href.indexOf('Sermon'));
-      console.log(deleteId);
       for (let j = 0; j < deleteId.length; j++) {
         id = deleteId[i].value;
       }
@@ -347,9 +342,6 @@ const linkBtns = [...document.querySelectorAll('.header__nav--links__item')];
 const submenu = document.querySelector('.header__submenu');
 const showcase = document.querySelector('.showcase');
 const nav = document.querySelector('.header__nav');
-// Updating copyright year
-// const copyrightYear = document.querySelector(".copyright-year");
-// copyrightYear.innerHTML = new Date().getFullYear();
 
 // hide/show sidebar
 if (toggleBtn)
@@ -432,10 +424,7 @@ ${links
       }
     });
   });
-// if (sidebarHeader)
-// sidebarHeader[0].addEventListener("click", function (e) {
-//   sidebarSublinks[0].classList.toggle("showsublinks");
-// });
+
 if (sidebarHeader)
   [...sidebarHeader].forEach((sublink, i) => {
     sublink.addEventListener('click', function () {
