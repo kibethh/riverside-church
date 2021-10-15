@@ -33,6 +33,8 @@ const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD
 );
+// const DB = process.env.MONGODB_URL;
+
 const store = new MongoDBStore({
   uri: DB,
   collection: 'sessions',
